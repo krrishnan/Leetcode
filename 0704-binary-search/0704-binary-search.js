@@ -4,25 +4,24 @@
  * @return {number}
  */
 var search = function(nums, target) {
-    let newNums = [...nums];
-  let index = Math.floor(newNums.length / 2);
+  let index = Math.floor(nums.length / 2);
 
-  while (newNums.length > 0) {
-    const length = newNums.length;
+  while (nums.length > 0) {
+    const length = nums.length;
     const middle = Math.floor(length / 2);
-    const value = newNums[middle];
+    const value = nums[middle];
 
     if (value === target) return index;
 
     if (value < target) {
-      newNums = newNums.slice(middle + 1);
-      const newNumsMiddle = Math.floor(newNums.length / 2);
-      index += newNumsMiddle + 1;
+      nums = nums.slice(middle + 1);
+      const numsMiddle = Math.floor(nums.length / 2);
+      index += numsMiddle + 1;
     }
     if (value > target) {
-      newNums = newNums.slice(0, middle);
-      const newNumsMiddle = Math.floor(newNums.length / 2);
-      index -= newNums.length - newNumsMiddle;
+      nums = nums.slice(0, middle);
+      const numsMiddle = Math.floor(nums.length / 2);
+      index -= nums.length - numsMiddle;
     }
   }
   return -1;
