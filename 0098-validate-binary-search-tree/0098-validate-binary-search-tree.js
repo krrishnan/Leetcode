@@ -10,18 +10,19 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-const inorder = (node, result) => {
-  node.left && inorder(node.left, result);
-  result.push(node.val);
-  node.right && inorder(node.right, result);
+const validateTree = (min, node, max) => {
+  if (!node) return true;
+
+  const isValid = min < node.val && node.val < max;
+  if (!isValid) return false;
+
+  return (
+    validateTree(min, node.left, node.val) &&
+    validateTree(node.val, node.right, max)
+  );
 };
 var isValidBST = function(root) {
   if (!root) return false;
-  let result = [];
-  inorder(root, result);
 
-  for (let i = 1; i < result.length; i++) {
-    if (result[i] <= result[i - 1]) return false;
-  }
-  return true;
+  return validateTree(Number.NEGATIVE_INFINITY, root, Number.POSITIVE_INFINITY);
 };
