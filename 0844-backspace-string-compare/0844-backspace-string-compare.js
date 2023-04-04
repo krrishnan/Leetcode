@@ -4,17 +4,19 @@
  * @return {boolean}
  */
 const removeBackSpace = (str) => {
-  let newStr = "";
-  for (let i = 0; i < str.length; i++) {
-    const isBackSpace = str.charAt(i) === "#";
-    if (isBackSpace) {
-      newStr = newStr.slice(0, newStr.length - 1);
+  while (str.indexOf("#") !== -1) {
+    const backSpaceIndex = str.indexOf("#");
+    if (backSpaceIndex === 0) {
+      str = str.slice(1);
     } else {
-      newStr += str.charAt(i);
+      str = str.slice(0, backSpaceIndex - 1) + str.slice(backSpaceIndex + 1);
     }
   }
-  return newStr;
+  return str;
 };
 var backspaceCompare = function(s, t) {
-    return removeBackSpace(s) === removeBackSpace(t);
+    const newS = removeBackSpace(s);
+    const newT = removeBackSpace(t);
+    console.log("NEW", newS,newT)
+    return newS === newT;
 };
